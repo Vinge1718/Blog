@@ -42,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        <p class="copyright">&copy; 2016 Edo Masaru</p>
+                        <p class="copyright">&copy; 2019 Victor Blog</p>
                     </div>
                     <div class="col-md-4">
                         <nav>
