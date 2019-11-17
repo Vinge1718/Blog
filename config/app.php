@@ -174,6 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 
@@ -190,7 +191,7 @@ return [
 
     'aliases' => [
 
-        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class, 
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
