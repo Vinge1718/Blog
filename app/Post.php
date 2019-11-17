@@ -34,10 +34,10 @@ class Post extends Model
         return $imageUrl;
     }
 
-  public function getDateAttribute($value)
-    {
-        return is_null($this->published_at) ? '' : $this->published_at->diffForHumans();
-    }
+    public function getDateAttribute($value)
+      {
+          return is_null($this->published_at) ? '' : $this->published_at->diffForHumans();
+      }
 
     public function getBodyHtmlAttribute($value)
     {
@@ -49,13 +49,18 @@ class Post extends Model
         return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;
     }
 
-  public function scopeLatestFirst($query)
-    {
-        return $query->orderBy('created_at', 'desc');
-    }
+    public function scopeLatestFirst($query)
+      {
+          return $query->orderBy('created_at', 'desc');
+      }
 
-  public function scopePublished($query)
-    {
-        return $query->where("published_at", "<=", Carbon::now());
-    }
+    public function scopePopular($query)
+      {
+          return $query->orderBy('view_count', 'desc');
+      }
+
+    public function scopePublished($query)
+      {
+          return $query->where("published_at", "<=", Carbon::now());
+      }
 }
