@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
 
       // generate 3 users/author
       $faker = Factory::create();
-      
+
       DB::table('users')->insert([
           [
               'name' => "Chrstine Thogori",
@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
           [
               'name' => "Victor Njonge",
               'slug' => 'victor-njonge',
-              'email' => "vic@test.com",
+              'email' => "vnjonge@yahoo.com",
               'password' => bcrypt('secret'),
               'bio' => $faker->text(rand(250, 300))
           ],
