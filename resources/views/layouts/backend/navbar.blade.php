@@ -19,18 +19,18 @@
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
+          <?php $currentUser = Auth::user() ?>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="/backend/img/user2-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs">Christine Thogori</span>
+            <img src="{{ $currentUser->gravatar() }}" class="user-image" alt="{{ $currentUser->name }}">
+            <span class="hidden-xs">{{ $currentUser->name }}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="/backend/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src="{{ $currentUser->gravatar() }}" class="img-circle" alt="User Image">
 
               <p>
-                Christine Thogori - Web Developer
-                <small>Member since Nov. 2019</small>
+                {{ $currentUser->name }} - Web Developer
               </p>
             </li>
             <!-- Menu Footer-->

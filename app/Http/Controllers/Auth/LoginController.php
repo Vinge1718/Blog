@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -26,6 +27,19 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+
+
+    public function logout(Request $request){
+
+      $this -> guard()->logout();
+
+      $request->session()->invalidate();
+
+      $request->session()->regenerate();
+
+      return $this->loggedOut($request) ?: redirect('/login');
+    }
+
 
     /**
      * Create a new controller instance.
