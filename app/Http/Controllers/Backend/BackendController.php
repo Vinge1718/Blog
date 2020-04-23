@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class BackendController extends Controller
 {
-  
+
   /**
    * Create a new controller instance.
    *
