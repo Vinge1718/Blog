@@ -135,7 +135,8 @@ return [
     */
 
     'providers' => [
-        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class, 
         /*
          * Laravel Framework Service Providers...
          */
@@ -191,6 +192,7 @@ return [
 
     'aliases' => [
 
+        'Image' => Intervention\Image\Facades\Image::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
