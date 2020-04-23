@@ -66,7 +66,13 @@
                     </div>
                     <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
                         {!! Form::label('published_at', 'Publish Date') !!}
-                        {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
+                        <div class='input-group date' id='datetimepicker1'>
+                            {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        
 
                         @if($errors->has('published_at'))
                             <span class="help-block">{{ $errors->first('published_at') }}</span>
@@ -82,7 +88,18 @@
                     </div>
                     <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                         {!! Form::label('image', 'Feature Image') !!}
-                        {!! Form::file('image') !!}
+                        <br>
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODkiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTg5IiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9Ijk0LjUiIHk9IjcwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTg5eDE0MDwvdGV4dD48L3N2Zz4="  alt="...">
+                          </div>
+                          <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                          <div>
+                            <span class="btn btn-outline-secondary btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{!! Form::file('image') !!}</span>
+                            <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
+                          </div>
+                        </div>
+                        
 
                         @if($errors->has('image'))
                             <span class="help-block">{{ $errors->first('image') }}</span>
@@ -129,5 +146,10 @@
 
         var simplemde1 = new SimpleMDE({ element: $("#excerpt")[0] });
         var simplemde2 = new SimpleMDE({ element: $("#body")[0] });
+
+        $('#datetimepicker1').datetimepicker({
+          format: 'YYYY-MM-DD HH:mm:ss',
+          showClear: true
+        });
     </script>
 @endsection
