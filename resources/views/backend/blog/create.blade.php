@@ -23,16 +23,18 @@
       <!-- Main content -->
       <section class="content">
           <div class="row">
-            <div class="col-xs-12">
+             {!! Form::model($post, [
+                  'method' => 'POST',
+                  'route'  => 'backend.blog.store',
+                  'files'  => TRUE,
+                  'id' => 'post-form'
+             ]) !!}
+ 
+            <div class="col-xs-9">
               <div class="box">
                 <div class="box-body ">
-                   {!! Form::model($post, [
-                        'method' => "POST",
-                        'route' => 'backend.blog.store',
-                        'files'  => TRUE
-                   ]) !!} 
 
-                   <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
+                    <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                         {!! Form::label('title') !!}
                         {!! Form::text('title', null, ['class' => 'form-control']) !!}
 
@@ -51,10 +53,6 @@
                     <div class="form-group excerpt">
                         {!! Form::label('excerpt') !!}
                         {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
-
-                        @if($errors->has('excerpt'))
-                            <span class="help-block">{{ $errors->first('excerpt') }}</span>
-                        @endif
                     </div>
                     <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
                         {!! Form::label('body') !!}
@@ -64,59 +62,86 @@
                             <span class="help-block">{{ $errors->first('body') }}</span>
                         @endif
                     </div>
-                    <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
-                        {!! Form::label('published_at', 'Publish Date') !!}
-                        <div class='input-group date' id='datetimepicker1'>
-                            {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                        
-
-                        @if($errors->has('published_at'))
-                            <span class="help-block">{{ $errors->first('published_at') }}</span>
-                        @endif
-                    </div>
-                    <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-                        {!! Form::label('category_id', 'Category') !!}
-                        {!! Form::select('category_id', App\Category::pluck('title', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Choose category']) !!}
-
-                        @if($errors->has('category_id'))
-                            <span class="help-block">{{ $errors->first('category_id') }}</span>
-                        @endif
-                    </div>
-                    <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                        {!! Form::label('image', 'Feature Image') !!}
-                        <br>
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                        <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
-                            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODkiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTg5IiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9Ijk0LjUiIHk9IjcwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTg5eDE0MDwvdGV4dD48L3N2Zz4="  alt="...">
-                          </div>
-                          <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-                          <div>
-                            <span class="btn btn-outline-secondary btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{!! Form::file('image') !!}</span>
-                            <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
-                          </div>
-                        </div>
-                        
-
-                        @if($errors->has('image'))
-                            <span class="help-block">{{ $errors->first('image') }}</span>
-                        @endif
-                    </div>
-
-                    <hr>
-
-                    {!! Form::submit('Create new post', ['class' => 'btn btn-primary']) !!}
-
-                   {!! Form::close() !!}
                 </div>
                 <!-- /.box-body -->
-               
               </div>
               <!-- /.box -->
             </div>
+      
+            <div class="col-xs-3">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Publish</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group {{ $errors->has('published_at') ? 'has-error' : '' }}">
+                            {!! Form::label('published_at', 'Publish Date') !!}
+                            <div class='input-group date' id='datetimepicker1'>
+                                {!! Form::text('published_at', null, ['class' => 'form-control', 'placeholder' => 'Y-m-d H:i:s']) !!}
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+
+
+                            @if($errors->has('published_at'))
+                                <span class="help-block">{{ $errors->first('published_at') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div class="pull-left">
+                            <a id="draft-btn" class="btn btn-default">Save Draft</a>
+                        </div>
+                        <div class="pull-right">
+                            {!! Form::submit('Publish', ['class' => 'btn btn-primary']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Category</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
+                            {!! Form::select('category_id', App\Category::pluck('title', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Choose category']) !!}
+
+                            @if($errors->has('category_id'))
+                                <span class="help-block">{{ $errors->first('category_id') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Feature Image</h3>
+                    </div>
+                    <div class="box-body text-center">
+                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                              <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODkiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTg5IiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9Ijk0LjUiIHk9IjcwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTg5eDE0MDwvdGV4dD48L3N2Zz4=" alt="...">
+                              </div>
+                              <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                              <div>
+                                <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>{!! Form::file('image') !!}</span>
+                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                              </div>
+                            </div>
+
+                            @if($errors->has('image'))
+                                <span class="help-block">{{ $errors->first('image') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            {!! Form::close() !!}
+         
           </div>
         <!-- ./row -->
       </section>
@@ -127,29 +152,32 @@
 
 
 @section('script')
-    <script type="text/javascript">
+<script type="text/javascript">
         $('ul.pagination').addClass('no-margin pagination-sm');
-        
-        
-        $('#title').on('blur', function() {
-          var theTitle = this.value.toLowerCase().trim(),
-          slugInput = $('#slug');
-          theSlug = theTitle.replace(/&/g, '-and-')
-                            .replace(/\s+/g, '-')
-                            .replace(/^-+|-+$/g, '')
-                            .replace(/-{2,}/g, '-')
-                            .replace(/[^a-zA-Z0-9]+/g,"-");
-                           
 
-          slugInput.val(theSlug);
+        $('#title').on('blur', function() {
+            var theTitle = this.value.toLowerCase().trim(),
+                slugInput = $('#slug'),
+                theSlug = theTitle.replace(/&/g, '-and-')
+                                  .replace(/[^a-z0-9-]+/g, '-')
+                                  .replace(/\-\-+/g, '-')
+                                  .replace(/^-+|-+$/g, '');
+
+            slugInput.val(theSlug);
         });
 
         var simplemde1 = new SimpleMDE({ element: $("#excerpt")[0] });
         var simplemde2 = new SimpleMDE({ element: $("#body")[0] });
 
         $('#datetimepicker1').datetimepicker({
-          format: 'YYYY-MM-DD HH:mm:ss',
-          showClear: true
+            format: 'YYYY-MM-DD HH:mm:ss',
+            showClear: true
+        });
+
+        $('#draft-btn').click(function(e) {
+            e.preventDefault();
+            $('#published_at').val("");
+            $('#post-form').submit();
         });
     </script>
 @endsection
