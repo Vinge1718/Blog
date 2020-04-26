@@ -2,15 +2,16 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-
-  protected $fillable = ['title', 'slug', 'excerpt', 'body', 'published_at', 'category_id', 'image'];  
-  protected $dates = ['published_at'];
+    use SoftDeletes;
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'published_at', 'category_id', 'image'];  
+    protected $dates = ['published_at'];
 
   public function author()
     {
