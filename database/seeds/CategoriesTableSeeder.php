@@ -14,26 +14,30 @@ class CategoriesTableSeeder extends Seeder
       DB::table('categories')->truncate();
 
       DB::table('categories')->insert([
-          [
-              'title' => 'Web Design',
-              'slug' => 'web-design'
-          ],
-          [
-              'title' => 'Web Programming',
-              'slug' => 'web-web-programming'
-          ],
-          [
-              'title' => 'Internet',
-              'slug' => 'internet'
-          ],
-          [
-              'title' => 'Social Marketing',
-              'slug' => 'social-marketing'
-          ],
-          [
-              'title' => 'Photography',
-              'slug' => 'photography'
-          ],
+            [
+                'title' => 'Uncategorized',
+                'slug' => 'uncategorized'
+            ], 
+            [
+                'title' => 'Web Design',
+                'slug' => 'web-design'
+            ],
+            [
+                'title' => 'Web Programming',
+                'slug' => 'web-web-programming'
+            ],
+            [
+                'title' => 'Internet',
+                'slug' => 'internet'
+            ],
+            [
+                'title' => 'Social Marketing',
+                'slug' => 'social-marketing'
+            ],
+            [
+                'title' => 'Photography',
+                'slug' => 'photography'
+            ],
       ]);
 
       // update the posts data

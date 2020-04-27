@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class BackendController extends Controller
 {
-
+  protected $limit = 5;
+  
   /**
    * Create a new controller instance.
    *
